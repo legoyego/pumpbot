@@ -1,24 +1,29 @@
 # BinanceScrapper
 
-Basically binance has only 24h hour change. It calls binance api every 10 seconds and stores and with 
+change config 
 
-`/api/check?min={number_of_minutes}&ticker={BTC,NANO}` gets all change % within that minutes.
+config/prod.secret.exs file
 
-So lets say you wanna know what coins are up 5 minutes, or up 15 minutes or 6 hours or whateva you do it like that
+```
+config :binance,
+  api_key: "xxx",
+  secret_key: "xxx"
 
-main files are 
+config :binance_scrapper, BinanceScrapperWeb.Endpoint,
+  secret_key_base: "PT5WcKoWzKkCxIaajmzCSlpmkhel/LewDFZ+f3uj3+ECZmtmRjWo/SK76pbSjqaf"
 
-scrapper.ex  - change value to whateva seconds you wanna ping. default 10 seconds
+config :nostrum,
+  token: "xxx" # your bot token
+```
 
-purger.ex - purge every x seconds. default 2 days.
+# Configure your database
+config :binance_scrapper, BinanceScrapper.Repo,
+  adapter: Ecto.Adapters.Postgres,
+  username: "postgres",
+  password: "postgres",
+  database: "binance_scrapper_prod",
+  pool_size: 15
 
-history_controller.ex - api get and format shitz
-
-i would have added a websocket but im feeling hungry maybe later or you add and lemme know
-
-also kindly host it somewhere if you can it will save me 5 bucks lol
-
-ps. dont forget use your own api in `config/config.exs`. and dont you dare steal any funds from my secret 
 
 To start your Phoenix server:
 
@@ -37,3 +42,4 @@ Ready to run in production? Please [check our deployment guides](http://www.phoe
   * Docs: https://hexdocs.pm/phoenix
   * Mailing list: http://groups.google.com/group/phoenix-talk
   * Source: https://github.com/phoenixframework/phoenix
+
